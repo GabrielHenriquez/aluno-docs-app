@@ -3,8 +3,8 @@ export const colors = {
 
   grayDark: "#535353",
   grayMedium: "#616161",
-  gray: "#9E9E9E",
-  grayLight: "#D9D9D9",
+  gray: "#8E8E8E",
+  grayLight: "#D5D5D5",
   grayLighter: "#EFEFEF",
 
   greenDarkest: "#12472F",
@@ -21,3 +21,5 @@ export const colors = {
   background: "#FEFCF8",
   white: "#FFFFFF",
 };
+
+export type IColors = keyof typeof colors;
