@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.gabrielstudy22.alunodocsapp'
+    namespace 'com.alunodocs.app'
     defaultConfig {
-        applicationId 'com.gabrielstudy22.alunodocsapp'
+        applicationId 'com.alunodocs.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

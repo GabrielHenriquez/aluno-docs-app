@@ -1,4 +1,4 @@
-package com.gabrielstudy22.alunodocsapp
+package com.alunodocs.app
 
 import android.app.Application
 import android.content.res.Configuration
