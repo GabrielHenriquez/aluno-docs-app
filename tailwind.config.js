@@ -2,7 +2,9 @@ import { colors } from "./src/common/styles/colors";
 import { fontFamily } from "./src/common/styles/fonts";
 
 const content = [
-  "./src/app/**/*.{js,jsx,ts,tsx}",
+  "app.{js,jsx,ts,tsx}",
+  "./src/routes/**/*.{js,jsx,ts,tsx}",
+  "./src/screens/**/*.{js,jsx,ts,tsx}",
   "./src/common/components/**/*.{js,jsx,ts,tsx}",
 ];
 
