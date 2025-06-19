@@ -1,15 +1,13 @@
-// routes/app/CustomDrawerContent.tsx
 import React, { ReactNode } from "react";
-import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { View, Image, StatusBar } from "react-native";
 import LogoutRedLogo from "@assets/images/modal/logout-red.svg";
-import { colors } from "@styles/colors";
-import { ArrowBigUpDashIcon, FolderClosed, LogOut } from "lucide-react-native";
 import FolderCheckIcon from "@assets/icons/folder-check.svg";
 import Button from "@components/Button";
 import Text from "@components/Text";
 import Modal from "@components/Modal";
-import Spacer from "@components/Spacer";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { View, Image, StatusBar } from "react-native";
+import { colors } from "@styles/colors";
+import { ArrowBigUpDashIcon, FolderClosed, LogOut } from "lucide-react-native";
 import { AppNavigationProp } from "./homeStack";
 import { useNavigation } from "@react-navigation/native";
 import { useAuthStore } from "@stores/auth/authStore";
@@ -65,14 +63,14 @@ export default function CustomDrawerContent(props: any) {
             height: 86,
             borderRadius: 50,
             borderWidth: 1,
-            borderColor: colors.grayLight,
+            borderColor: colors.gray3,
           }}
           resizeMode="contain"
         />
         <Text size={20} className="font-interSemiBold text-grayDark">
           {user?.nome}
         </Text>
-        <Text size={14} className="text-gray mt-1">
+        <Text size={14} className="text-grayMedium mt-0.5">
           Matrícula: {user?.matricula}
         </Text>
       </View>
@@ -87,14 +85,15 @@ export default function CustomDrawerContent(props: any) {
                 onPress={action}
                 styleRest={{
                   borderWidth: 1,
-                  borderColor: "#CECCCC",
+                  elevation: 1,
+                  borderColor: colors.gray3,
                   alignItems: "flex-start",
                   height: 38,
                   paddingLeft: 12,
                 }}
               >
                 {icon}
-                <Text className="font-semibold text-black" size={16}>
+                <Text className="font-semibold text-black" size={17}>
                   {text}
                 </Text>
               </Button>
