@@ -15,6 +15,8 @@ module.exports = function (api) {
             "@screens": "./src/screens",
             "@components": "./src/common/components",
             "@utils": "./src/common/utils",
+            "@mocks": "./src/common/mocks",
+            "@models": "./src/common/models",
             "@stores": "./src/common/stores",
             "@hooks": "./src/common/hooks",
             "@services": "./src/common/services",

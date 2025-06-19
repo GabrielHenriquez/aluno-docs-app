@@ -10,6 +10,8 @@
       "@services/*": ["common/services/*"],
       "@stores/*": ["common/stores/*"],
       "@styles/*": ["common/styles/*"],
+      "@mocks/*": ["common/mocks/*"],
+      "@models/*": ["common/models/*"],
       "@components/*": ["common/components/*"],
       "@utils/*": ["common/utils/*"],
       "@routes/*": ["routes/*"]
