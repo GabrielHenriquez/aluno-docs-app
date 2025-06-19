@@ -80,6 +80,16 @@ npx expo run:ios
 
 ---
 
+## 📦 Download do APK
+
+> 📲 Você pode baixar o app diretamente no seu dispositivo Android através do link abaixo:
+
+🔗 [Clique aqui para baixar o APK](https://drive.google.com/file/d/1D2_o5JV_i-y5p3JuKe48FoFDZ2vMD4FT/view?usp=sharing)
+
+Após baixar, pode ser necessário permitir instalações de fontes desconhecidas no seu dispositivo Android.
+
+---
+
 ## 🔑 Como Acessar o App
 
 O login é feito por **matrícula e senha**.
