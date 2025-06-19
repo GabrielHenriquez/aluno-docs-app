@@ -41,6 +41,15 @@ export default {
             "Allow Aluno Docs to access your Face ID biometric data.",
         },
       ],
+      [
+        "expo-image-picker",
+        {
+          photosPermission:
+            "The app accesses your photos to let you share them with your friends.",
+        },
+      ],
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf",
     ],
   },
 };
