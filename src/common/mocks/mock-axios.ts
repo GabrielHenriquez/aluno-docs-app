@@ -1,8 +1,10 @@
 import MockAdapter from "axios-mock-adapter";
 import { API } from "common/configs/api";
 import { mockDB } from "./mock-db";
-
+import { IUploadedDocument, IUploadPayload } from "@models/document";
 const mock = new MockAdapter(API);
+
+const uploadedDocuments = mockDB.uploadedDocuments as IUploadedDocument[];
 
 mock.onPost("/auth/login").reply((config) => {
   const { registration, password } = JSON.parse(config.data);
@@ -18,19 +20,36 @@ mock.onGet("/student/documents").reply(200, mockDB.availableDocuments);
 mock.onGet("/student/documents/uploaded").reply(200, mockDB.uploadedDocuments);
 
 mock.onPost("/student/documents/upload").reply((config) => {
-  const { title, category, file } = JSON.parse(config.data);
+  const { id, title, category, file } = JSON.parse(config.data);
 
-  const validCategories = ["atestado", "justificativa", "requerimento"];
+  const validCategories = [
+    "atestado",
+    "justificativa",
+    "requerimento",
+    "outros",
+  ];
 
   if (
+    typeof id === "string" &&
     typeof title === "string" &&
-    title.trim() !== "" &&
     validCategories.includes(category) &&
     file &&
     typeof file.name === "string" &&
     typeof file.type === "string" &&
-    typeof file.size === "number"
+    typeof file.size === "number" &&
+    typeof file.uri === "string"
   ) {
+    const newDoc: any = {
+      id,
+      title,
+      category,
+      status: "enviado",
+      uploadDate: new Date().toISOString(),
+      file,
+    };
+
+    uploadedDocuments.push(newDoc);
+
     return [201, { message: "Documento enviado com sucesso", id: "up_new" }];
   }
 
@@ -42,9 +61,11 @@ mock.onPut(new RegExp("/student/documents/.*/status")).reply((config) => {
   const documentId = match ? match[1] : null;
   const { status } = JSON.parse(config.data);
 
-  const validStatuses = ["enviado", "em_analise", "aprovado", "rejeitado"];
+  const validStatuses = ["em_analise", "aprovado", "rejeitado"];
 
   if (documentId && validStatuses.includes(status)) {
+    const index = uploadedDocuments.findIndex((doc) => doc.id === documentId);
+    if (index !== -1) uploadedDocuments[index].status = status;
     return [
       200,
       {
