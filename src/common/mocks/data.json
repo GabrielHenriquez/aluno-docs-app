@@ -8,6 +8,7 @@
       "comunicado": "Comunicado"
     },
     "upload": {
+      "all": "Todos",
       "atestado": "Atestado Médico",
       "justificativa": "Justificativa de Falta",
       "requerimento": "Requerimento",
@@ -24,9 +25,9 @@
     {
       "id": "1",
       "title": "Histórico Escolar Completo",
-      "type": "pdf",
+      "type": "docx",
       "category": "historico",
-      "url": "./assets/historico_escolar.pdf",
+      "url": "https://github.com/GabrielHenriquez/mock-files/raw/refs/heads/main/historico_escolar.docx",
       "date": "2024-02-15",
       "size": "2.3 MB",
       "description": "Histórico escolar completo com todas as disciplinas cursadas.",
@@ -35,9 +36,9 @@
     {
       "id": "2",
       "title": "Boletim 1º Bimestre 2024",
-      "type": "pdf",
+      "type": "image",
       "category": "boletim",
-      "url": "./assets/boletim_escolar.pdf",
+      "url": "https://github.com/GabrielHenriquez/mock-files/blob/main/boletim_escolar.png?raw=true",
       "date": "2024-04-10",
       "size": "856 KB",
       "description": "Boletim de notas do primeiro bimestre de 2024.",
@@ -46,9 +47,9 @@
     {
       "id": "3",
       "title": "Declaração de Matrícula",
-      "type": "html",
+      "type": "pdf",
       "category": "declaracao",
-      "url": "./assets/declaracao_matricula.html",
+      "url": "https://firebasestorage.googleapis.com/v0/b/coro-jovem-amisadai.appspot.com/o/declaracao_matricula.pdf?alt=media&token=1977de74-dfd9-4d40-8377-1a664360a5f9",
       "date": "2024-05-20",
       "size": "45 KB",
       "description": "Declaração oficial de matrícula para o ano letivo de 2024."
@@ -58,7 +59,7 @@
       "title": "Comunicado - Reunião de Pais",
       "type": "html",
       "category": "comunicado",
-      "url": "./assets/comunicado_reuniao.html",
+      "url": "https://firebasestorage.googleapis.com/v0/b/coro-jovem-amisadai.appspot.com/o/comunicado.html?alt=media&token=d6546240-4c5e-4e3e-8c67-992ddffc7800",
       "date": "2024-05-25",
       "size": "32 KB",
       "description": "Comunicado sobre reunião de pais e mestres."
