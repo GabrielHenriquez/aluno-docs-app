@@ -14,8 +14,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     borderRadius: 8,
-    borderWidth: 0.5,
-    borderColor: colors.gray,
+    borderWidth: 1,
+    borderColor: colors.gray3,
+    elevation: 1
   },
   textInput: {
     flex: 1,

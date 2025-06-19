@@ -29,7 +29,7 @@ const Button = ({
       {activeLoading ? (
         <ActivityIndicator size={25} color="#FFFFFF" />
       ) : (
-        <View className="flex-row items-center space-x-2 gap-2">
+        <View className="flex-row items-center space-x-2 gap-2.5">
           {children}
         </View>
       )}
