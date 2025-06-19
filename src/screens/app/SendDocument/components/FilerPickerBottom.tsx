@@ -3,17 +3,45 @@ import {
   BottomSheetView,
   useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
+import Text from "@components/Text";
 import { forwardRef, useMemo } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import * as RN from "react-native";
 import { colors } from "@styles/colors";
-import Text from "@components/Text";
+import * as RN from "react-native";
 
-const FilePickerBottomSheet = forwardRef<BottomSheetModal, {}>((props, ref) => {
+interface FilePickerBottomSheetProps {
+  onCameraPress: VoidFunction;
+  onGalleryPress: VoidFunction;
+  onFilePress: VoidFunction;
+}
+
+const FilePickerBottomSheet = forwardRef<
+  BottomSheetModal,
+  FilePickerBottomSheetProps
+>(({ onCameraPress, onGalleryPress, onFilePress }, ref) => {
   const snapPoints = useMemo(() => ["40%"], []);
   const { bottom } = useSafeAreaInsets();
   const { dismiss } = useBottomSheetModal();
+
+  const content = [
+    {
+      icon: <Ionicons name="camera-outline" size={28} color={colors.black} />,
+      label: "Câmera",
+      action: () => onCameraPress(),
+    },
+    {
+      icon: <Ionicons name="image-outline" size={28} color={colors.black} />,
+      label: "Galeria",
+      action: () => onGalleryPress(),
+    },
+    {
+      icon: <Ionicons name="document-outline" size={28} color={colors.black} />,
+      label: "Arquivos",
+      action: () => onFilePress(),
+    },
+  ];
+
   return (
     <BottomSheetModal
       ref={ref}
@@ -35,7 +63,7 @@ const FilePickerBottomSheet = forwardRef<BottomSheetModal, {}>((props, ref) => {
             RN.StyleSheet.absoluteFillObject,
             style,
             {
-              backgroundColor: "rgba(7, 7, 7, 0.1)", // opaco
+              backgroundColor: "rgba(7, 7, 7, 0.1)",
             },
           ]}
         />
@@ -53,26 +81,20 @@ const FilePickerBottomSheet = forwardRef<BottomSheetModal, {}>((props, ref) => {
             Selecione uma opção
           </Text>
 
-          <RN.TouchableOpacity className="flex-row items-center py-3 border-b border-gray">
-            <Ionicons name="camera-outline" size={28} color={colors.black} />
-            <Text size={18} className="ml-3 font-interSemiBold text-black">
-              Câmera
-            </Text>
-          </RN.TouchableOpacity>
-
-          <RN.TouchableOpacity className="flex-row items-center py-3 border-b border-gray">
-            <Ionicons name="image-outline" size={28} color={colors.black} />
-            <Text size={18} className="ml-3 font-interSemiBold text-black">
-              Galeria
-            </Text>
-          </RN.TouchableOpacity>
-
-          <RN.TouchableOpacity className="flex-row items-center py-3">
-            <Ionicons name="document-outline" size={28} color={colors.black} />
-            <Text size={18} className="ml-3 font-interSemiBold text-black">
-              Arquivos
-            </Text>
-          </RN.TouchableOpacity>
+          {content.map(({ action, icon, label }, index) => (
+            <RN.TouchableOpacity
+              key={label}
+              onPress={action}
+              className={`flex-row items-center py-3 ${
+                index < content.length - 1 ? "border-b border-gray" : ""
+              }`}
+            >
+              {icon}
+              <Text size={18} className="ml-3 font-interSemiBold text-black">
+                {label}
+              </Text>
+            </RN.TouchableOpacity>
+          ))}
         </RN.View>
       </BottomSheetView>
     </BottomSheetModal>
