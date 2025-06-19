@@ -10,6 +10,6 @@ export const mockDB = {
     token: "fake_token_jwt_test",
   },
   availableDocuments,
-  uploadedDocuments,
-  documentCategories,
+  uploadedDocuments: [...uploadedDocuments],
+  documentCategories: { ...documentCategories } as const,
 };

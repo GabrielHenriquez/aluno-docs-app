@@ -2,11 +2,9 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
-import DocumentsSent from "@screens/app/DocumentsSent/view";
+import { DocumentsSent, MyDocuments } from "@screens/app/Documents/view";
 import Home from "@screens/app/Home/view";
-import MyDocuments from "@screens/app/MyDocuments/view";
 import SendDocument from "@screens/app/SendDocument/view";
-
 
 export type AppStackParamList = {
   Home: undefined;

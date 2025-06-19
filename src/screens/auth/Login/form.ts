@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { ICredentials } from "common/models/auth";
+import { ICredentials } from "@models/auth";
 
 const useFormLogin = () => {
   const [secureTextActive, setSecureTextActive] = useState(true);

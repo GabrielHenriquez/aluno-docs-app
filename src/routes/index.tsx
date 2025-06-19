@@ -1,6 +1,6 @@
 import { useAuthStore } from "@stores/auth/authStore";
 import DrawerNavigator from "./app/drawerNavigator";
-import AuthRoutes from "./auth";
+import AuthRoutes from "./auth/authStack";
 
 const Routes = () => {
   const { user } = useAuthStore();

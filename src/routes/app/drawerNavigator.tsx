@@ -13,7 +13,7 @@ export default function DrawerNavigator() {
       screenOptions={{
         headerShown: false,
         drawerStyle: {
-          width: width * 0.78, // 80% of the screen width
+          width: width * 0.78,
         },
       }}
       drawerContent={CustomDrawerContent}

@@ -1,7 +1,7 @@
 import AuthService from "@services/auth";
 import { useAuthStore } from "@stores/auth/authStore";
 import { useMutation } from "@tanstack/react-query";
-import { ICredentials } from "common/models/auth";
+import { ICredentials } from "@models/auth";
 import { Keyboard } from "react-native";
 
 const useLoginViewModel = () => {

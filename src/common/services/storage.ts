@@ -8,7 +8,6 @@ const storageMMKV = new MMKV();
 export const saveUser = async (user: IUser) => {
   try {
     await SecureStore.setItemAsync(StorageKeys.USER, JSON.stringify(user));
-    console.log("[SecureStore] Usuário salvo com sucesso!");
   } catch (error) {
     console.error("[SecureStore] Falha ao salvar usuário", error);
   }
@@ -28,7 +27,6 @@ export async function getUser(): Promise<IUser | null> {
 export async function removeUser() {
   try {
     await SecureStore.deleteItemAsync(StorageKeys.USER);
-    console.log("[SecureStore] User data removed");
   } catch (error) {
     console.error("[SecureStore] Falha ao remover usuário.", error);
   }

@@ -1,6 +1,6 @@
 import { IUser } from "@stores/auth/authStore.model";
 import { API } from "common/configs/api";
-import { ICredentials } from "common/models/auth";
+import { ICredentials } from "@models/auth";
 
 class AuthService {
   async login(credentials: ICredentials): Promise<IUser> {
