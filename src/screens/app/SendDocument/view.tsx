@@ -1,37 +1,65 @@
-import React, { useCallback, useRef, useState } from "react";
 import Header from "@components/Header";
 import Spacer from "@components/Spacer";
 import AnimatedDropdown from "@components/Dropdown";
 import Text from "@components/Text";
 import Button from "@components/Button";
-import FilePickerBottomSheet from "./components/FilerPickerBottom";
 import Modal from "@components/Modal";
+import FilePickerBottomSheet from "./components/FilerPickerBottom";
+import Camera from "./components/Camera";
 import CheckLogo from "@assets/images/modal/check.svg";
+import useSendDocumentViewModel from "./view.model";
 import { useNavigation } from "@react-navigation/native";
-import { Plus } from "lucide-react-native";
+import { AppNavigationProp } from "@routes/app/homeStack";
+import { Link, Plus, Trash2 } from "lucide-react-native";
 import { colors } from "@styles/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { AppNavigationProp } from "@routes/app/homeStack";
+import { getDefaultFileName } from "./utils/getFileName";
 import * as RN from "react-native";
 
 const SendDocument = () => {
-  const { goBack, navigate } = useNavigation<AppNavigationProp>();
-  const { height } = RN.Dimensions.get("window");
+  const { goBack } = useNavigation<AppNavigationProp>();
   const { bottom } = useSafeAreaInsets();
-  const [selected, setSelected] = useState("");
-  const [visiblePreviewImage, setVisiblePreviewImage] = useState(false);
-  const [visibleModalSuccess, setVisibleModalSuccess] = useState(false);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const { height } = RN.Dimensions.get("window");
+  const VM = useSendDocumentViewModel();
 
-  const handlePresentModalPress = useCallback(
-    () => bottomSheetModalRef.current?.present(),
-    []
+  const renderFileInfo = () => (
+    <RN.View className="px-3 justify-between flex-row bg-grayLight items-center py-1.5 rounded-lg">
+      <RN.View className="gap-2 flex-row items-center" style={{ flex: 0.8 }}>
+        <Link size={18} color={colors.grayDark} />
+        <Text size={15} className="text-grayDark font-interMedium">
+          {getDefaultFileName(VM?.attachedFileImage, VM?.attachedFile)}
+        </Text>
+      </RN.View>
+      <RN.TouchableOpacity
+        style={{ flex: 0.06 }}
+        className="py-1 items-center justify-center"
+        onPress={VM?.removeAttached}
+      >
+        <Trash2 size={20} color={colors.grayDark} />
+      </RN.TouchableOpacity>
+    </RN.View>
+  );
+
+  const renderFileButton = () => (
+    <Button
+      bgColor="greenLight"
+      styleRest={{
+        borderStyle: "dashed",
+        borderWidth: 2.5,
+        borderColor: colors.greenDarkest,
+      }}
+      onPress={VM?.handlePresentModalPress}
+    >
+      <Plus size={30} color={colors.greenDarkest} />
+      <Text size={18} className="font-interBold text-greenDarkest">
+        Selecionar arquivo
+      </Text>
+    </Button>
   );
 
   return (
     <RN.View className="flex-1 bg-background">
-      <Header onPressBack={goBack} title="Enviar documento" />
+      <Header title="Enviar documento" onPressBack={goBack} />
       <Spacer height={30} />
 
       <RN.View className="px-6 flex-1">
@@ -49,14 +77,20 @@ const SendDocument = () => {
 
         <AnimatedDropdown
           label="Categoria do documento"
-          data={Array(4).fill("Testando opção")}
-          selected={selected}
-          setSelected={setSelected}
+          data={VM.flatListData}
+          selected={VM.selected}
+          setSelected={VM.setSelected}
         />
 
-        <Spacer height={10} />
+        <Camera
+          visible={VM.showCamera}
+          onClose={() => VM.setShowCamera(false)}
+          onPictureTaken={VM.onPictureTaken}
+        />
 
-        <Text size={16} className="font-interMedium text-grayDark">
+        <Spacer height={14} />
+
+        <Text size={15} className="font-interMedium text-grayDark">
           Selecione o arquivo que deseja enviar para a escola. Certifique-se de
           que o documento esteja legível.
         </Text>
@@ -64,41 +98,20 @@ const SendDocument = () => {
         <Spacer height={5} />
 
         <Text size={14} className="font-interMedium text-redDark">
-          *Aceitamos arquivos nos formatos: PDF, DOCX, HTML, JPG e PNG. Tamanho
-          máximo: 10MB.
+          *Aceitamos arquivos nos formatos: PDF, DOCX, HTML, JPG e PNG.
         </Text>
 
         <Spacer height={20} />
 
-        <Button
-          bgColor="greenLight"
-          styleRest={{
-            borderStyle: "dashed",
-            borderWidth: 2.5,
-            borderColor: colors.greenDarkest,
-          }}
-          onPress={() => setVisibleModalSuccess(true)}
-        >
-          <Plus size={30} color={colors.greenDarkest} />
-          <Text size={18} className="font-interBold text-greenDarkest">
-            Selecionar arquivo
-          </Text>
-        </Button>
+        {VM?.hasAttachment ? renderFileInfo() : renderFileButton()}
 
-        {/*         <RN.View className="px-3 justify-between flex-row bg-grayLight items-center py-1.5 rounded-lg">
-          <RN.View className="gap-1.5 flex-row items-center">
-            <Link size={18} color={colors.grayDark} />
-            <Text size={15} className="text-grayDark font-inter">
-              Atestado_RPH_203129.pdf
-            </Text>
-          </RN.View>
-          <RN.TouchableOpacity className="px-1 py-0.5 left-1">
-            <Trash2 size={20} color={colors.grayDark} />
-          </RN.TouchableOpacity>
-        </RN.View>
-*/}
         <RN.View style={{ bottom: bottom + 20 }} className="mt-auto">
-          <Button bgColor="gray" disabled>
+          <Button
+            bgColor={VM?.hasAttachment && VM.selected ? "greenMedium" : "gray2"}
+            disabled={!(VM?.hasAttachment && VM.selected)}
+            onPress={VM?.handleSendDocument}
+            activeLoading={VM?.isLoading}
+          >
             <Text size={18} className="font-bold text-white">
               Enviar
             </Text>
@@ -106,28 +119,32 @@ const SendDocument = () => {
         </RN.View>
       </RN.View>
 
-      <FilePickerBottomSheet ref={bottomSheetModalRef} />
+      <FilePickerBottomSheet
+        ref={VM.bottomSheetModalRef}
+        onCameraPress={VM.handleOpenCamera}
+        onGalleryPress={VM.pickImage}
+        onFilePress={VM.openFilePicker}
+      />
 
       <Modal.Root>
-        <Modal.Content visible={visiblePreviewImage}>
+        <Modal.Content visible={VM.visiblePreviewImage}>
           <RN.Image
-            source={{
-              uri: "https://compraratestadomedico.com/wp-content/uploads/2023/02/comprar-atestado-medico.jpg",
-            }}
+            source={{ uri: VM.galleryImage?.uri ?? VM.cameraImage?.uri }}
             style={{ width: 285, height: 380 }}
-            resizeMode="contain"
+            resizeMode="cover"
           />
 
           <Button
             bgColor="white"
-            styleRest={{ borderWidth: 1, borderColor: colors.grayDark }}
+            styleRest={{ borderWidth: 1.5, borderColor: colors.greenDark }}
+            onPress={VM?.handleModalPreviewAnother}
           >
             <Text size={18} className="font-interBold text-greenDark">
-              Tirar outra
+              {VM.cameraImage ? "Tirar outra" : "Escolher outra"}
             </Text>
           </Button>
 
-          <Button onPress={() => setVisiblePreviewImage(false)}>
+          <Button onPress={VM?.handleModalAttach}>
             <Text size={18} className="font-interBold text-white">
               Anexar
             </Text>
@@ -136,7 +153,7 @@ const SendDocument = () => {
       </Modal.Root>
 
       <Modal.Root>
-        <Modal.Content visible={visibleModalSuccess}>
+        <Modal.Content visible={VM.visibleModalSuccess}>
           <CheckLogo width={90} height={90} />
           <Modal.Title>Documento enviado com sucesso!</Modal.Title>
           <Modal.Subtitle>
@@ -144,10 +161,7 @@ const SendDocument = () => {
           </Modal.Subtitle>
           <Button
             styleRest={{ height: 40, marginTop: 4 }}
-            onPress={() => {
-              setVisibleModalSuccess(false);
-              setTimeout(() => navigate("DocumentsSent"), 500);
-            }}
+            onPress={VM?.handleModalSuccessContinue}
           >
             <Text className="text-white font-interBold">Continuar</Text>
           </Button>
