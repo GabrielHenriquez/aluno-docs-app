@@ -73,7 +73,7 @@ const Home = () => {
           O que você quer fazer agora?
         </Text>
 
-        <RN.View className="w-full px-6 mt-2 gap-3">
+        <RN.View className="w-full px-6 mt-2 gap-3.5">
           {Object.entries(contentsButton).map(
             ([key, { icon, text, action }]) => (
               <Button
@@ -82,7 +82,8 @@ const Home = () => {
                 onPress={action}
                 styleRest={{
                   borderWidth: 1,
-                  borderColor: "#CECCCC",
+                  borderColor: colors.gray3,
+                  elevation: 1,
                   alignItems: "flex-start",
                   paddingHorizontal: 16,
                 }}
