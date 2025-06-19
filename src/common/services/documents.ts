@@ -1,5 +1,6 @@
+import { sleep } from "@utils/sleep";
 import { API } from "common/configs/api";
-import * as Model from "common/models/document";
+import * as Model from "@models/document";
 
 class DocumentService {
   async getAvailableDocuments(): Promise<Model.IDocument[]> {
@@ -22,8 +23,9 @@ class DocumentService {
 
   async uploadDocument(
     payload: Model.IUploadPayload
-  ): Promise<{ id: string; message: string }> {
+  ): Promise<Model.IUploadedDocument> {
     try {
+      await sleep(1000);
       const { data } = await API.post("/student/documents/upload", payload);
       return data;
     } catch (error) {
