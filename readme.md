@@ -84,7 +84,7 @@ npx expo run:ios
 
 > 📲 Você pode baixar o app diretamente no seu dispositivo Android através do link abaixo:
 
-🔗 [Clique aqui para baixar o APK](https://drive.google.com/file/d/1D2_o5JV_i-y5p3JuKe48FoFDZ2vMD4FT/view?usp=sharing)
+🔗 [Clique aqui para baixar o APK](https://drive.google.com/file/d/11D_80h-yoe9fW9e99hIGULPz5USwJRve/view?usp=sharing)
 
 Após baixar, pode ser necessário permitir instalações de fontes desconhecidas no seu dispositivo Android.
 
@@ -112,13 +112,20 @@ Após realizar o login, você poderá visualizar documentos escolares e enviar n
 ### 📤 Upload De Documento / Lista De Documentos Enviados
 ![Upload](./assets/assetsDoc/App-2.png)
 
+
+## 🎨 Design no Figma
+
+> O protótipo do app foi criado no Figma e está disponível no link abaixo:
+
+🔗 [Acessar o Design no Figma](https://www.figma.com/design/jWiq7Ar8why9OsP2EExnyK/Aluno-Docs?node-id=0-1&t=ZHRI4l2RpsdmViIY-1)
+
+---
+
 ## 🧪 Desenvolvimento e Simulação
 
 - Toda a funcionalidade de login, listagem, envio e filtros é baseada em **dados simulados com JSON local**.
 - As requisições HTTP são interceptadas e tratadas por `axios-mock-adapter`.
 - Ideal para testes e demonstrações sem dependência de um backend real.
-
----
 
 ## 💡 Diferenciais Técnicos
 
