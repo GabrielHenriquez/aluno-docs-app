@@ -113,7 +113,7 @@ const DocumentsView = <T extends IDocument | IUploadedDocument>({
           <LoadingDocuments />
         ) : (
           <DocumentList<T>
-            isRefetchingList={VM?.isRefetching}
+            isRefetchingList={false}
             refetch={VM?.refetch}
             listType={listType}
             data={VM.filteredDocuments}

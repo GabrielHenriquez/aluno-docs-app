@@ -28,7 +28,7 @@ const useDocumentsViewModel = <T extends IDocument | IUploadedDocument>({
   categories,
   listType,
 }: UseDocumentsViewModelProps<T>) => {
-  const { data: documents, isPending, isRefetching, refetch } = useDocumentsHook();
+  const { data: documents, isPending, refetch } = useDocumentsHook();
   useAutoUpdateLastDocStatus(documents!, listType);
   const { navigate, goBack } = useNavigation<AppNavigationProp>();
   const documentCategories: DocumentCategoryEntry[] = Object.entries(
@@ -82,7 +82,6 @@ const useDocumentsViewModel = <T extends IDocument | IUploadedDocument>({
   };
 
   return {
-    isRefetching,
     refetch,
     handleBack,
     handleDocumentPress,
