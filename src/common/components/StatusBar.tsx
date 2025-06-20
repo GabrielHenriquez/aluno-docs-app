@@ -1,5 +1,4 @@
-import { colors } from "@styles/colors";
-import { IColors } from "@styles/model";
+import { colors, IColors } from "@styles/colors";
 import * as Native from "react-native";
 interface StatusBarParams extends Native.StatusBarProps {
   backgroundColor: IColors;

@@ -1,6 +1,6 @@
 import StatusBar from "./StatusBar";
 import Text from "./Text";
-import { ChevronLeft, Rows } from "lucide-react-native";
+import { ChevronLeft } from "lucide-react-native";
 import { colors, IColors } from "@styles/colors";
 import { ReactNode } from "react";
 import * as RN from "react-native";
